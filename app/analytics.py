@@ -83,6 +83,7 @@ def build_stats(db, username, today=None):
         "total_commits": total,
         "commits_last_30_days": sum(a["commits"] for a in activity if a["date"] >= cutoff),
         "active_days": len(activity),
+        "biggest_day": max(activity,key=lambda d: d["commits"]) if activity else None,
         "longest_streak": longest,
         "current_streak": current,
         "most_productive_day": max(by_day, key=lambda d: d["commits"])["day"] if total else None,
