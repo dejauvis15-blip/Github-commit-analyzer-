@@ -11,6 +11,8 @@
   <div class="panel tile"><div class="value" id="current">–</div><div class="label">Current streak (days)</div></div>
   <div class="panel tile"><div class="value" id="longest">–</div><div class="label">Longest streak (days)</div></div>
   <div class="panel tile"><div class="value" id="bestday">–</div><div class="label">Most productive day</div></div>
+  <div class="panel tile"><div class="value" id="biggest">-</div></div>
+  <div class="label">Biggest day</div>
 </div>
 
 <div class="panel"><h3>Last 12 months</h3><div class="heatmap" id="heatmap"></div></div>
@@ -51,6 +53,8 @@ function heatmap(daily) {
                          ["longest", s.longest_streak], ["bestday", s.most_productive_day ?? "–"]])
     document.getElementById(id).textContent = v;
 
+  document.getElementById("biggest").textContent =
+    s.biggest_day ? `${s.biggest_day.commits} on ${s.biggest_day.date}` : "–";
   heatmap(s.daily_activity);
   const bar = (id, labels, data) => new Chart(document.getElementById(id), {
     type: "bar", data: { labels, datasets: [{ data, backgroundColor: green }] },
